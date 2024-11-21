@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-deployment
+  namespace: llm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm
+  template:
+    metadata:
+      labels:
+        app: llm
+    spec:
+      containers:
+        - name: text-generation-inference
+          image: ghcr.io/huggingface/text-generation-inference:2.3.0
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+          env:
+            - name: MODEL_ID
+              value: NousResearch/Hermes-3-Llama-3.1-8B
+            - name: NUM_SHARD
+              value: "1"
+            - name: PORT
+              value: "8080"
+                #            - name: QUANTIZE
+              #              value: bitsandbytes-nf4
+          volumeMounts:
+            - mountPath: /model-cache
+              name: model-cache
+      volumes:
+        - name: model-cache
+          persistentVolumeClaim:
+            claimName: model-cache-pvc

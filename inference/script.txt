@@ -3,9 +3,21 @@ docker run --gpus all --shm-size 64g -p 8080:80 -v $PWD/data:/data \
     --model-id /data/models-meta-llama-Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b \
     --quantize bitsandbytes
 
+
 docker run --runtime nvidia --gpus all \
     -v $PWD:/data \
     -p 8000:8000 \
     --ipc=host \
     vllm/vllm-openai:latest \
     --model /data/models-meta-llama-Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b
+
+#AMD
+
+model=teknium/OpenHermes-2.5-Mistral-7B
+volume=$PWD/data # share a volume with the Docker container to avoid downloading weights every run
+
+docker run --rm -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
+    --device=/dev/kfd --device=/dev/dri --group-add video \
+    --ipc=host --shm-size 256g --net host -v $volume:/data \
+    ghcr.io/huggingface/text-generation-inference:2.4.0-rocm \
+    --model-id $model
