@@ -1,25 +1,33 @@
-from transformers import GPT2Tokenizer, GPT2LMHeadModel, get_scheduler
+from transformers import GPT2Tokenizer, GPT2LMHeadModel, GPT2Config, get_scheduler
 from torch.utils.data import DataLoader
 from datasets import load_dataset, load_from_disk
 from torch.cuda.amp import autocast, GradScaler
 import torch
 
 # Load dataset
-data_dir = "./wikitext-103-v1"
+data_dir = "../bookcorpus"
 dataset = load_from_disk(data_dir)
-text_data = " ".join(dataset["text"])
 
 print("Dataset loaded.")
 
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 tokenizer.pad_token = tokenizer.eos_token
+
 def tokenize_data(example):
     return tokenizer(example['text'], padding='max_length', truncation=True)
 
 tokenized_datasets = dataset.map(tokenize_data, batched=True, remove_columns=["text"])
 
 # Load GPT model
-model = GPT2LMHeadModel.from_pretrained("gpt2").to("cuda")
+config = GPT2Config(
+    vocab_size=50257,       # Default vocabulary size for GPT-2
+    n_embd=768,             # Hidden size (embedding size)
+    n_layer=12,             # Number of layers
+    n_head=12,              # Number of attention heads
+    n_positions=1024        # Maximum sequence length
+)
+
+model = GPT2LMHeadModel(config).from_pretrained("gpt2").to("cuda")
 
 def collate_fn(batch):
     return {
