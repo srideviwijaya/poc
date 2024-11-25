@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-example-monitor
+  namespace: ns1
+spec:
+  endpoints:
+  - authorization:
+      credentials:
+        key: token 
+        name: example-bearer-auth 
+    port: web
+  selector:
+    matchLabels:
+      app: prometheus-example-app

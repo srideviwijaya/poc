@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-bearer-auth
+  namespace: ns1
+stringData:
+  token: <authentication_token> 
