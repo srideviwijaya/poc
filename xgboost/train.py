@@ -34,7 +34,8 @@ dtest = xgb.DMatrix("higgs_test.dmatrix")
 param = {}
 param['objective'] = 'binary:logitraw'
 param['eval_metric'] = 'error'
-param['tree_method'] = 'gpu_hist'
+# param['tree_method'] = 'gpu_hist'
+param['device'] = 'cuda'
 param['silent'] = 1
 param['max_depth'] = 15
 
