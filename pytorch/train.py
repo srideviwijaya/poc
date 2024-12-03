@@ -2,6 +2,7 @@ from torch.optim import Adam
 import torch.nn.functional as F
 import torch.nn as nn
 import torch
+import math
 
 from datasets import load_dataset, load_from_disk
 from torch.utils.data import Dataset, DataLoader
@@ -91,14 +92,15 @@ for epoch in range(epochs):
         total_loss += loss.item()
 
     avg_loss = total_loss / len(dataloader)
-    print(f"Epoch {epoch + 1}, Loss: {avg_loss:.4f}")
-    logging.info(f"Epoch {epoch + 1}, Loss: {avg_loss:.4f}")
+    perplexity = math.exp(avg_loss)
+    # print(f"Epoch {epoch + 1}, Loss: {avg_loss:.4f}")
+    logging.info(f"Epoch {epoch + 1}, Loss: {avg_loss:.4f}, Perplexity: {perplexity:.4f}")
     end_time = time.time()
-    print(f"Per epoch time: {end_time - start_time} seconds")
+    # print(f"Per epoch time: {end_time - start_time} seconds")
     logging.info(f"Per epoch time: {end_time - start_time} seconds")
 
 train_end_time = time.time()
-print(f"Total training time: {train_end_time - train_start_time} seconds")
+# print(f"Total training time: {train_end_time - train_start_time} seconds")
 logging.info(f"Total training time: {train_end_time - train_start_time} seconds")
 
 # Define the path to save the model
@@ -106,6 +108,6 @@ model_save_path = "transformer_model.pth"
 
 # Save the model's state dictionary
 torch.save(model.state_dict(), model_save_path)
-print(f"Model saved to {model_save_path}")
+# print(f"Model saved to {model_save_path}")
 logging.info(f"Model saved to {model_save_path}")
 
