@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pytorch-ddp-training
+spec:
+  completions: 1
+  parallelism: 2  # Number of nodes
+  template:
+    spec:
+      containers:
+      - name: ddp-worker
+        image: # replace with own image
+        command: ["python", "train_ddp.py"]
+        env:
+        - name: WORLD_SIZE
+          value: "2"  # Match the parallelism
+        - name: RANK
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.annotations['kubernetes.io/pod-name']
+        - name: MASTER_ADDR
+          value: "<master_pod_ip>"  # Replace with master pod IP
+        - name: MASTER_PORT
+          value: "12355"
+        resources:
+          limits:
+            nvidia.com/gpu: 1  # Request 1 GPU per container
+      restartPolicy: Never

@@ -1,7 +1,7 @@
-docker run --gpus all --shm-size 64g -p 8080:80 -v $PWD/data:/data \
+docker run --gpus all --shm-size 64g -p 8080:80 -v $PWD:/data \
     ghcr.io/huggingface/text-generation-inference:2.4.0 \
-    --model-id /data/models-meta-llama-Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b \
-    --quantize bitsandbytes
+    --model-id /data/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b \
+    --quantize eetq
 
 
 docker run --runtime nvidia --gpus all \
@@ -10,6 +10,9 @@ docker run --runtime nvidia --gpus all \
     --ipc=host \
     vllm/vllm-openai:latest \
     --model /data/models-meta-llama-Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b
+
+export NUMBA_CACHE_DIR=/tmp
+export TRITON_CACHE_DIR=/tmp
 
 #AMD
 
@@ -22,4 +25,21 @@ docker run --rm -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
     ghcr.io/huggingface/text-generation-inference:2.4.0-rocm \
     --model-id $model
 
+docker run --rm -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
+    --device=/dev/kfd --device=/dev/dri --group-add video \
+    --ipc=host --shm-size 256g --net host -v ${PWD}:/data \
+    ghcr.io/huggingface/text-generation-inference:2.4.0-rocm \
+    --model-id /data/models/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b/ \
+    --tokenizer-config-path /data/tokenizer_config.json
 
+send request
+
+curl 127.0.0.1:8080/generate \
+    -X POST \
+    -d '{
+  "inputs":"What is Deep Learning?",
+  "parameters":{
+    "max_new_tokens":20
+  }
+}' \
+    -H 'Content-Type: application/json'

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: triton
+  namespace: llm-poc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: triton
+  template:
+    metadata:
+      labels:
+        app: triton
+    spec:
+      containers:
+        - name: triton
+          image: nvcr.io/nvidia/tritonserver:24.07-trtllm-python-py3
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+          volumeMounts:
+            - mountPath: /mnt
+              name: poc-store
+            - mountPath: /.cache
+              name: cache-store
+      volumes:
+        - name: poc-store
+          persistentVolumeClaim:
+            claimName: poc-store
+        - name: cache-store
+          persistentVolumeClaim:
+            claimName: cache-store
