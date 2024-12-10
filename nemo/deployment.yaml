@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nemo
+  namespace: llm-poc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nemo
+  template:
+    metadata:
+      labels:
+        app: nemo
+    spec:
+      containers:
+        - name: nemo
+          image: nvcr.io/nvidia/nemo:dev
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+          args: ["sleep", "infinity"]
