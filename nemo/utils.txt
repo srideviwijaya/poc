@@ -1,3 +1,4 @@
 nemo llm pretrain --factory "nemotron3_4b(num_gpus_per_node=1,tensor_parallelism=1)"
+nemo llm pretrain --factory "qwen2_500m(num_gpus_per_node=1)"
 
 COPY ./megatron /root/.cache/torch/megatron

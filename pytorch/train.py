@@ -7,6 +7,7 @@ import math
 from datasets import load_dataset, load_from_disk
 from torch.utils.data import Dataset, DataLoader
 from torchtext.data.utils import get_tokenizer
+# from transformers import GPT2Tokenizer
 from collections import Counter
 import sys
 import logging
@@ -23,15 +24,17 @@ logging.info(f"Check if cuda is available: {torch.cuda.is_available()}")
 # sys.exit(0)
 
 # Load dataset
-data_dir = "./wikitext-103-v1-train"
-dataset = load_from_disk(data_dir)
+# data_dir = "./wikitext-103-v1-train"
+# dataset = load_from_disk(data_dir)
+dataset = load_dataset("wikitext", "wikitext-2-v1", split="train")
 text_data = " ".join(dataset["text"])
 
-# print("Dataset loaded.")
 logging.info("Dataset loaded")
 
 # Tokenize the text at the word level
 tokenizer = get_tokenizer("basic_english")
+# tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+# tokenizer.pad_token = tokenizer.eos_token
 tokens = tokenizer(text_data)
 
 # print("Tokenization completed.")
@@ -49,7 +52,11 @@ encoded_text = [vocab.get(word, vocab["<UNK>"]) for word in tokens]
 # Dataset creation
 sequence_length = 32
 dataset = WikiTextDataset(encoded_text, sequence_length)
-dataloader = DataLoader(dataset, batch_size=16, shuffle=True)
+dataloader = DataLoader(dataset, batch_size=512, shuffle=True)
+# len_dl = len(dataloader)
+# print(len_dl)
+
+# sys.exit(0)
 
 # Model definition
 src_vocab_size = vocab_size
@@ -90,6 +97,7 @@ for epoch in range(epochs):
         optimizer.step()
         
         total_loss += loss.item()
+        logging.info(f"Epoch {epoch + 1}, Total Loss: {total_loss:.4f}")
 
     avg_loss = total_loss / len(dataloader)
     perplexity = math.exp(avg_loss)
