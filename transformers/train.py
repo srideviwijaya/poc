@@ -22,19 +22,24 @@ def configure_logging(log_file):
     sys.stderr = sys.stdout
 
 configure_logging("training.log")
-logging.info(f"Check if cuda is available: {torch.cuda.is_available()}")
+
+# Check GPU availability
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+logging.info(f"Using device: {device}")
+
 # Load dataset
+logging.info("Loading dataset...")
 # data_dir = "../bookcorpus"
 # dataset = load_from_disk(data_dir)
 dataset = load_dataset("wikitext", "wikitext-2-v1", split="train")
 
-logging.info("Dataset loaded.")
+logging.info(f"Dataset loaded: {len(dataset)} samples")
 
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 tokenizer.pad_token = tokenizer.eos_token
 
 def tokenize_data(example):
-    return tokenizer(example['text'], padding='max_length', truncation=True)
+    return tokenizer(example['text'], padding='max_length', truncation=True, max_length=512)
 
 tokenized_datasets = dataset.map(tokenize_data, batched=True, remove_columns=["text"])
 
@@ -44,7 +49,7 @@ config = GPT2Config(
     n_embd=256,             # Hidden size (embedding size)
     n_layer=3,             # Number of layers
     n_head=4,              # Number of attention heads
-    n_positions=1024        # Maximum sequence length
+    n_positions=512        # Maximum sequence length
 )
 
 model = GPT2LMHeadModel(config).from_pretrained("gpt2").to("cuda")
@@ -56,44 +61,60 @@ def collate_fn(batch):
     }
 
 # Training loop
-train_dataloader = DataLoader(tokenized_datasets, batch_size=32, shuffle=True, collate_fn=collate_fn)
+# Dataloader
+batch_size = 16
+train_dataloader = DataLoader(
+    tokenized_datasets,
+    batch_size=batch_size,
+    shuffle=True,
+    collate_fn=collate_fn,
+    num_workers=8  # Adjust based on CPU cores
+)
 
 optimizer = torch.optim.AdamW(model.parameters(), lr=5e-5)
-
 num_training_steps = len(train_dataloader) * 3  # Assuming 3 epochs
+logging.info(f"Total training steps: {num_training_steps} steps")
+
 lr_scheduler = get_scheduler(
     "linear", optimizer=optimizer, num_warmup_steps=500, num_training_steps=num_training_steps
 )
 
-logging.info("Training started.")
-# print(len(train_dataloader))
-
+# Training loop
 scaler = GradScaler()
+logging.info("Starting training...")
+epochs = 3
+gradient_accumulation_steps = 2  # Simulate batch_size * 2
+total_training_time = 0
+
 train_start_time = time.time()
 for epoch in range(3):  # 3 epochs
     model.train()
     start_time = time.time()
     total_loss = 0
-    for batch in train_dataloader:
-        inputs = batch['input_ids'].to("cuda")
-        attention_mask = batch["attention_mask"].to("cuda")
 
-        optimizer.zero_grad()
+    for step, batch in enumerate(train_dataloader):
+        inputs = batch["input_ids"].to(device)
+        attention_mask = batch["attention_mask"].to(device)
 
-        with autocast():
+        with autocast():  # Mixed precision training
             outputs = model(inputs, attention_mask=attention_mask, labels=inputs)
-            loss = outputs.loss
-
-        # Backward pass
+            loss = outputs.loss / gradient_accumulation_steps  # Scale loss for accumulation
+        
         scaler.scale(loss).backward()
-        scaler.step(optimizer)
-        scaler.update()
 
-        lr_scheduler.step()
-        total_loss += loss.item()
+        # Gradient accumulation
+        if (step + 1) % gradient_accumulation_steps == 0 or (step + 1) == len(train_dataloader):
+            scaler.step(optimizer)
+            scaler.update()
+            optimizer.zero_grad()
+            lr_scheduler.step()
 
-        logging.info(f"Epoch {epoch + 1}, Total Loss: {total_loss:.4f}")
+        total_loss += loss.item() * gradient_accumulation_steps
 
+        # Log periodically
+        if step % 50 == 0:
+            logging.info(f"Epoch {epoch + 1}, Step {step}, Loss: {loss.item():.4f}")
+    
     avg_loss = total_loss / len(train_dataloader)
     perplexity = math.exp(avg_loss)
     # print(f"Epoch {epoch + 1}, Loss: {avg_loss:.4f}")

@@ -1,6 +1,7 @@
 from torch.optim import Adam
 import torch.nn.functional as F
 import torch.nn as nn
+from torch.cuda.amp import autocast, GradScaler
 import torch
 import math
 
@@ -19,25 +20,26 @@ from functions import *
 import time
 
 configure_logging("training.log")
-logging.info(f"Check if cuda is available: {torch.cuda.is_available()}")
+# Check GPU availability
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+logging.info(f"Using device: {device}")
 
 # sys.exit(0)
 
-# Load dataset
+# Load and preprocess dataset
+logging.info("Loading dataset...")
 # data_dir = "./wikitext-103-v1-train"
 # dataset = load_from_disk(data_dir)
 dataset = load_dataset("wikitext", "wikitext-2-v1", split="train")
 text_data = " ".join(dataset["text"])
 
-logging.info("Dataset loaded")
+logging.info("Dataset loaded.")
 
-# Tokenize the text at the word level
+# Tokenize and build vocabulary
+logging.info("Tokenizing dataset...")
 tokenizer = get_tokenizer("basic_english")
-# tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-# tokenizer.pad_token = tokenizer.eos_token
 tokens = tokenizer(text_data)
 
-# print("Tokenization completed.")
 logging.info("Tokenization completed")
 
 # Create vocabulary
@@ -52,11 +54,17 @@ encoded_text = [vocab.get(word, vocab["<UNK>"]) for word in tokens]
 # Dataset creation
 sequence_length = 32
 dataset = WikiTextDataset(encoded_text, sequence_length)
-dataloader = DataLoader(dataset, batch_size=512, shuffle=True)
-# len_dl = len(dataloader)
-# print(len_dl)
+batch_size = 512
+train_dataloader = DataLoader(
+    dataset,
+    batch_size=batch_size,
+    shuffle=True,
+    num_workers=8,  # Adjust based on CPU cores
+    pin_memory=True
+)
 
-# sys.exit(0)
+logging.info(f"DataLoader initialized with {len(train_dataloader)} batches.")
+logging.info(f"Total training steps: {len(train_dataloader)*5} steps")
 
 # Model definition
 src_vocab_size = vocab_size
@@ -68,38 +76,47 @@ d_ff = 1024
 max_seq_length = 32
 dropout = 0.1
 
-model = Transformer(src_vocab_size, tgt_vocab_size, d_model, num_heads, num_layers, d_ff, max_seq_length, dropout)
-model = model.to("cuda")
+model = Transformer(
+    src_vocab_size, tgt_vocab_size, d_model, num_heads, num_layers, d_ff, sequence_length, dropout
+).to(device)
+
 criterion = nn.CrossEntropyLoss(ignore_index=0)
 optimizer = Adam(model.parameters(), lr=0.0001, betas=(0.9, 0.98), eps=1e-9)
+scaler = GradScaler()
 
-# Start training
+# Training loop
 epochs = 5
-# print(vocab_size)
-# print("Training started.")
-logging.info("Training started")
+gradient_accumulation_steps = 4
+logging.info("Starting training...")
 
 train_start_time = time.time()
 for epoch in range(epochs):
-    start_time = time.time()
     model.train()
     total_loss = 0
-    for src, tgt in dataloader:
-        src, tgt = src.to("cuda"), tgt.to("cuda")
-        optimizer.zero_grad()
-
+    start_time = time.time()
+    for step, (src, tgt) in enumerate(train_dataloader):
+        src, tgt = src.to(device), tgt.to(device)
         tgt_input = tgt[:, :-1]
         tgt_output = tgt[:, 1:]
 
-        logits = model(src, tgt_input)
-        loss = criterion(logits.reshape(-1, vocab_size), tgt_output.reshape(-1))
-        loss.backward()
-        optimizer.step()
-        
-        total_loss += loss.item()
-        logging.info(f"Epoch {epoch + 1}, Total Loss: {total_loss:.4f}")
+        with autocast(enabled=False):
+            logits = model(src, tgt_input)
+            loss = criterion(logits.view(-1, vocab_size), tgt_output.reshape(-1)) / gradient_accumulation_steps
 
-    avg_loss = total_loss / len(dataloader)
+        scaler.scale(loss).backward()
+
+        if (step + 1) % gradient_accumulation_steps == 0 or (step + 1) == len(train_dataloader):
+            scaler.step(optimizer)
+            scaler.update()
+            optimizer.zero_grad()
+
+        total_loss += loss.item() * gradient_accumulation_steps
+
+        # Log periodically
+        if step % 50 == 0:
+            logging.info(f"Epoch {epoch + 1}, Step {step}, Loss: {loss.item():.4f}")
+
+    avg_loss = total_loss / len(train_dataloader)
     perplexity = math.exp(avg_loss)
     # print(f"Epoch {epoch + 1}, Loss: {avg_loss:.4f}")
     logging.info(f"Epoch {epoch + 1}, Loss: {avg_loss:.4f}, Perplexity: {perplexity:.4f}")

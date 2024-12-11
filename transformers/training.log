@@ -1,0 +1,204 @@
+2024-12-11 14:33:25,302 - INFO - Using device: cuda
+2024-12-11 14:33:25,302 - INFO - Loading dataset...
+2024-12-11 14:33:36,185 - INFO - Dataset loaded: 36718 samples
+Map:   0%|          | 0/36718 [00:00<?, ? examples/s]Map:   3%|▎         | 1000/36718 [00:00<00:14, 2414.35 examples/s]Map:   5%|▌         | 2000/36718 [00:00<00:13, 2617.61 examples/s]Map:   8%|▊         | 3000/36718 [00:01<00:11, 3049.19 examples/s]Map:  11%|█         | 4000/36718 [00:01<00:10, 3204.34 examples/s]Map:  14%|█▎        | 5000/36718 [00:01<00:09, 3479.67 examples/s]Map:  16%|█▋        | 6000/36718 [00:01<00:08, 3603.25 examples/s]Map:  19%|█▉        | 7000/36718 [00:02<00:08, 3390.53 examples/s]Map:  22%|██▏       | 8000/36718 [00:02<00:08, 3454.32 examples/s]Map:  25%|██▍       | 9000/36718 [00:02<00:07, 3571.94 examples/s]Map:  27%|██▋       | 10000/36718 [00:02<00:07, 3660.37 examples/s]Map:  30%|██▉       | 11000/36718 [00:03<00:06, 3692.15 examples/s]Map:  33%|███▎      | 12000/36718 [00:03<00:06, 3825.32 examples/s]Map:  35%|███▌      | 13000/36718 [00:03<00:06, 3863.46 examples/s]Map:  38%|███▊      | 14000/36718 [00:03<00:05, 4009.16 examples/s]Map:  41%|████      | 15000/36718 [00:04<00:05, 3748.44 examples/s]Map:  44%|████▎     | 16000/36718 [00:04<00:05, 3742.46 examples/s]Map:  46%|████▋     | 17000/36718 [00:04<00:05, 3809.02 examples/s]Map:  49%|████▉     | 18000/36718 [00:05<00:04, 3903.82 examples/s]Map:  52%|█████▏    | 19000/36718 [00:05<00:04, 4020.06 examples/s]Map:  54%|█████▍    | 20000/36718 [00:05<00:04, 4059.08 examples/s]Map:  57%|█████▋    | 21000/36718 [00:05<00:03, 3982.34 examples/s]Map:  60%|█████▉    | 22000/36718 [00:06<00:03, 3923.47 examples/s]Map:  63%|██████▎   | 23000/36718 [00:06<00:03, 3948.09 examples/s]Map:  65%|██████▌   | 24000/36718 [00:06<00:03, 4075.09 examples/s]Map:  68%|██████▊   | 25000/36718 [00:06<00:02, 4212.95 examples/s]Map:  71%|███████   | 26000/36718 [00:06<00:02, 4171.97 examples/s]Map:  74%|███████▎  | 27000/36718 [00:07<00:02, 3979.12 examples/s]Map:  76%|███████▋  | 28000/36718 [00:07<00:02, 3898.79 examples/s]Map:  79%|███████▉  | 29000/36718 [00:07<00:01, 4088.02 examples/s]Map:  82%|████████▏ | 30000/36718 [00:07<00:01, 4158.58 examples/s]Map:  84%|████████▍ | 31000/36718 [00:08<00:01, 3892.99 examples/s]Map:  87%|████████▋ | 32000/36718 [00:08<00:01, 3896.92 examples/s]Map:  90%|████████▉ | 33000/36718 [00:08<00:00, 3889.99 examples/s]Map:  93%|█████████▎| 34000/36718 [00:09<00:00, 3909.20 examples/s]Map:  95%|█████████▌| 35000/36718 [00:09<00:00, 4027.93 examples/s]Map:  98%|█████████▊| 36000/36718 [00:09<00:00, 3998.28 examples/s]Map: 100%|██████████| 36718/36718 [00:09<00:00, 4049.47 examples/s]Map: 100%|██████████| 36718/36718 [00:09<00:00, 3798.31 examples/s]2024-12-11 14:33:49,477 - INFO - Starting training...
+
+2024-12-11 14:33:51,346 - INFO - Epoch 1, Step 0, Loss: 4.3872
+2024-12-11 14:34:22,074 - INFO - Epoch 1, Step 50, Loss: 2.8490
+2024-12-11 14:34:51,701 - INFO - Epoch 1, Step 100, Loss: 0.7489
+2024-12-11 14:35:23,857 - INFO - Epoch 1, Step 150, Loss: 0.4442
+2024-12-11 14:35:53,447 - INFO - Epoch 1, Step 200, Loss: 0.2909
+2024-12-11 14:36:21,995 - INFO - Epoch 1, Step 250, Loss: 0.2282
+2024-12-11 14:36:48,538 - INFO - Epoch 1, Step 300, Loss: 0.2393
+2024-12-11 14:37:16,523 - INFO - Epoch 1, Step 350, Loss: 0.3505
+2024-12-11 14:37:56,134 - INFO - Epoch 1, Step 400, Loss: 0.2428
+2024-12-11 14:38:36,818 - INFO - Epoch 1, Step 450, Loss: 0.1046
+2024-12-11 14:39:18,410 - INFO - Epoch 1, Step 500, Loss: 0.3482
+2024-12-11 14:39:59,819 - INFO - Epoch 1, Step 550, Loss: 0.2447
+2024-12-11 14:40:43,209 - INFO - Epoch 1, Step 600, Loss: 0.3237
+2024-12-11 14:41:26,540 - INFO - Epoch 1, Step 650, Loss: 0.3328
+2024-12-11 14:42:13,810 - INFO - Epoch 1, Step 700, Loss: 0.3211
+2024-12-11 14:42:56,690 - INFO - Epoch 1, Step 750, Loss: 0.2149
+2024-12-11 14:43:35,980 - INFO - Epoch 1, Step 800, Loss: 0.2205
+2024-12-11 14:44:15,406 - INFO - Epoch 1, Step 850, Loss: 0.3389
+2024-12-11 14:44:54,708 - INFO - Epoch 1, Step 900, Loss: 0.3683
+2024-12-11 14:45:32,678 - INFO - Epoch 1, Step 950, Loss: 0.3602
+2024-12-11 14:46:07,967 - INFO - Epoch 1, Step 1000, Loss: 0.1508
+2024-12-11 14:46:46,628 - INFO - Epoch 1, Step 1050, Loss: 0.3055
+2024-12-11 14:47:23,763 - INFO - Epoch 1, Step 1100, Loss: 0.1808
+2024-12-11 14:47:59,247 - INFO - Epoch 1, Step 1150, Loss: 0.2857
+2024-12-11 14:48:35,875 - INFO - Epoch 1, Step 1200, Loss: 0.2095
+2024-12-11 14:49:13,043 - INFO - Epoch 1, Step 1250, Loss: 0.2207
+Traceback (most recent call last):
+  File "/mnt/poc/transformers/train.py", line 110, in <module>
+    lr_scheduler.step()
+KeyboardInterrupt
+2024-12-11 14:49:48,242 - INFO - Using device: cuda
+2024-12-11 14:49:48,243 - INFO - Loading dataset...
+2024-12-11 14:49:58,470 - INFO - Dataset loaded: 36718 samples
+2024-12-11 14:50:01,754 - INFO - Total training steps: 6885 steps
+2024-12-11 14:50:01,754 - INFO - Starting training...
+2024-12-11 14:50:03,427 - INFO - Epoch 1, Step 0, Loss: 4.1631
+2024-12-11 14:50:26,384 - INFO - Epoch 1, Step 50, Loss: 3.4326
+Traceback (most recent call last):
+  File "/mnt/poc/transformers/train.py", line 107, in <module>
+    scaler.step(optimizer)
+  File "/opt/conda/lib/python3.10/site-packages/torch/amp/grad_scaler.py", line 453, in step
+    retval = self._maybe_opt_step(optimizer, optimizer_state, *args, **kwargs)
+  File "/opt/conda/lib/python3.10/site-packages/torch/amp/grad_scaler.py", line 350, in _maybe_opt_step
+    if not sum(v.item() for v in optimizer_state["found_inf_per_device"].values()):
+  File "/opt/conda/lib/python3.10/site-packages/torch/amp/grad_scaler.py", line 350, in <genexpr>
+    if not sum(v.item() for v in optimizer_state["found_inf_per_device"].values()):
+KeyboardInterrupt
+2024-12-11 14:51:16,028 - INFO - Using device: cuda
+2024-12-11 14:51:16,029 - INFO - Loading dataset...
+2024-12-11 14:51:26,787 - INFO - Dataset loaded: 36718 samples
+2024-12-11 14:51:30,086 - INFO - Total training steps: 6885 steps
+2024-12-11 14:51:30,087 - INFO - Starting training...
+2024-12-11 14:51:31,648 - INFO - Epoch 1, Step 0, Loss: 4.4361
+2024-12-11 14:51:53,874 - INFO - Epoch 1, Step 50, Loss: 3.0363
+2024-12-11 14:52:16,136 - INFO - Epoch 1, Step 100, Loss: 1.0832
+2024-12-11 14:52:39,057 - INFO - Epoch 1, Step 150, Loss: 0.3356
+2024-12-11 14:53:02,340 - INFO - Epoch 1, Step 200, Loss: 0.2141
+2024-12-11 14:53:25,147 - INFO - Epoch 1, Step 250, Loss: 0.3376
+2024-12-11 14:53:48,357 - INFO - Epoch 1, Step 300, Loss: 0.4614
+2024-12-11 14:54:10,839 - INFO - Epoch 1, Step 350, Loss: 0.3556
+2024-12-11 14:54:33,925 - INFO - Epoch 1, Step 400, Loss: 0.3591
+2024-12-11 14:54:56,938 - INFO - Epoch 1, Step 450, Loss: 0.3718
+2024-12-11 14:55:18,758 - INFO - Epoch 1, Step 500, Loss: 0.1753
+2024-12-11 14:55:41,310 - INFO - Epoch 1, Step 550, Loss: 0.3696
+2024-12-11 14:56:04,329 - INFO - Epoch 1, Step 600, Loss: 0.1065
+2024-12-11 14:56:27,128 - INFO - Epoch 1, Step 650, Loss: 0.1940
+2024-12-11 14:56:50,368 - INFO - Epoch 1, Step 700, Loss: 0.2053
+2024-12-11 14:57:13,452 - INFO - Epoch 1, Step 750, Loss: 0.1378
+2024-12-11 14:57:36,988 - INFO - Epoch 1, Step 800, Loss: 0.2223
+2024-12-11 14:57:59,504 - INFO - Epoch 1, Step 850, Loss: 0.2981
+2024-12-11 14:58:22,938 - INFO - Epoch 1, Step 900, Loss: 0.1286
+2024-12-11 14:58:46,252 - INFO - Epoch 1, Step 950, Loss: 0.2204
+2024-12-11 14:59:09,560 - INFO - Epoch 1, Step 1000, Loss: 0.0442
+2024-12-11 14:59:32,200 - INFO - Epoch 1, Step 1050, Loss: 0.1826
+2024-12-11 14:59:55,863 - INFO - Epoch 1, Step 1100, Loss: 0.2137
+2024-12-11 15:00:20,160 - INFO - Epoch 1, Step 1150, Loss: 0.2277
+2024-12-11 15:00:43,846 - INFO - Epoch 1, Step 1200, Loss: 0.2443
+2024-12-11 15:01:08,293 - INFO - Epoch 1, Step 1250, Loss: 0.3032
+2024-12-11 15:01:32,330 - INFO - Epoch 1, Step 1300, Loss: 0.2589
+2024-12-11 15:01:56,093 - INFO - Epoch 1, Step 1350, Loss: 0.1174
+2024-12-11 15:02:19,287 - INFO - Epoch 1, Step 1400, Loss: 0.2415
+2024-12-11 15:02:42,710 - INFO - Epoch 1, Step 1450, Loss: 0.3350
+2024-12-11 15:03:05,156 - INFO - Epoch 1, Step 1500, Loss: 0.2745
+2024-12-11 15:03:27,621 - INFO - Epoch 1, Step 1550, Loss: 0.2923
+2024-12-11 15:03:51,738 - INFO - Epoch 1, Step 1600, Loss: 0.2055
+2024-12-11 15:04:15,917 - INFO - Epoch 1, Step 1650, Loss: 0.1936
+2024-12-11 15:04:43,352 - INFO - Epoch 1, Step 1700, Loss: 0.2845
+2024-12-11 15:05:06,939 - INFO - Epoch 1, Step 1750, Loss: 0.1762
+2024-12-11 15:05:31,124 - INFO - Epoch 1, Step 1800, Loss: 0.2941
+2024-12-11 15:05:54,629 - INFO - Epoch 1, Step 1850, Loss: 0.2402
+2024-12-11 15:06:18,168 - INFO - Epoch 1, Step 1900, Loss: 0.2585
+2024-12-11 15:06:41,026 - INFO - Epoch 1, Step 1950, Loss: 0.1545
+2024-12-11 15:07:04,803 - INFO - Epoch 1, Step 2000, Loss: 0.2108
+2024-12-11 15:07:29,190 - INFO - Epoch 1, Step 2050, Loss: 0.1969
+2024-12-11 15:07:53,670 - INFO - Epoch 1, Step 2100, Loss: 0.1517
+2024-12-11 15:08:18,111 - INFO - Epoch 1, Step 2150, Loss: 0.1547
+2024-12-11 15:08:40,417 - INFO - Epoch 1, Step 2200, Loss: 0.2115
+2024-12-11 15:09:04,061 - INFO - Epoch 1, Step 2250, Loss: 0.1744
+2024-12-11 15:09:26,642 - INFO - Epoch 1, Loss: 0.6961, Perplexity: 2.0060
+2024-12-11 15:09:26,643 - INFO - Per epoch time: 1076.5555486679077 seconds
+2024-12-11 15:09:27,274 - INFO - Epoch 2, Step 0, Loss: 0.2721
+2024-12-11 15:09:51,428 - INFO - Epoch 2, Step 50, Loss: 0.2948
+2024-12-11 15:10:13,793 - INFO - Epoch 2, Step 100, Loss: 0.2175
+2024-12-11 15:10:38,430 - INFO - Epoch 2, Step 150, Loss: 0.2457
+2024-12-11 15:11:02,985 - INFO - Epoch 2, Step 200, Loss: 0.1789
+2024-12-11 15:11:26,686 - INFO - Epoch 2, Step 250, Loss: 0.2022
+2024-12-11 15:11:49,231 - INFO - Epoch 2, Step 300, Loss: 0.2211
+2024-12-11 15:12:14,339 - INFO - Epoch 2, Step 350, Loss: 0.1480
+2024-12-11 15:12:39,808 - INFO - Epoch 2, Step 400, Loss: 0.1865
+2024-12-11 15:13:06,446 - INFO - Epoch 2, Step 450, Loss: 0.3006
+2024-12-11 15:13:32,246 - INFO - Epoch 2, Step 500, Loss: 0.2280
+2024-12-11 15:13:57,252 - INFO - Epoch 2, Step 550, Loss: 0.0960
+2024-12-11 15:14:21,077 - INFO - Epoch 2, Step 600, Loss: 0.2741
+2024-12-11 15:14:46,747 - INFO - Epoch 2, Step 650, Loss: 0.1682
+2024-12-11 15:15:12,823 - INFO - Epoch 2, Step 700, Loss: 0.2211
+2024-12-11 15:15:37,763 - INFO - Epoch 2, Step 750, Loss: 0.2025
+2024-12-11 15:16:03,208 - INFO - Epoch 2, Step 800, Loss: 0.0959
+2024-12-11 15:16:29,371 - INFO - Epoch 2, Step 850, Loss: 0.2796
+2024-12-11 15:16:54,882 - INFO - Epoch 2, Step 900, Loss: 0.1823
+2024-12-11 15:17:19,909 - INFO - Epoch 2, Step 950, Loss: 0.2671
+2024-12-11 15:17:49,224 - INFO - Epoch 2, Step 1000, Loss: 0.2069
+2024-12-11 15:18:15,822 - INFO - Epoch 2, Step 1050, Loss: 0.2150
+2024-12-11 15:18:41,742 - INFO - Epoch 2, Step 1100, Loss: 0.2095
+2024-12-11 15:19:07,714 - INFO - Epoch 2, Step 1150, Loss: 0.1905
+2024-12-11 15:19:32,780 - INFO - Epoch 2, Step 1200, Loss: 0.1711
+2024-12-11 15:20:00,240 - INFO - Epoch 2, Step 1250, Loss: 0.2100
+2024-12-11 15:20:26,553 - INFO - Epoch 2, Step 1300, Loss: 0.2893
+2024-12-11 15:20:54,034 - INFO - Epoch 2, Step 1350, Loss: 0.2093
+2024-12-11 15:21:21,921 - INFO - Epoch 2, Step 1400, Loss: 0.2619
+2024-12-11 15:21:47,217 - INFO - Epoch 2, Step 1450, Loss: 0.2048
+2024-12-11 15:22:15,357 - INFO - Epoch 2, Step 1500, Loss: 0.2025
+2024-12-11 15:22:44,106 - INFO - Epoch 2, Step 1550, Loss: 0.2133
+2024-12-11 15:23:10,327 - INFO - Epoch 2, Step 1600, Loss: 0.2498
+2024-12-11 15:23:36,480 - INFO - Epoch 2, Step 1650, Loss: 0.2567
+2024-12-11 15:24:02,607 - INFO - Epoch 2, Step 1700, Loss: 0.2436
+2024-12-11 15:24:29,009 - INFO - Epoch 2, Step 1750, Loss: 0.1848
+2024-12-11 15:24:57,636 - INFO - Epoch 2, Step 1800, Loss: 0.2886
+2024-12-11 15:25:23,621 - INFO - Epoch 2, Step 1850, Loss: 0.0782
+2024-12-11 15:25:49,817 - INFO - Epoch 2, Step 1900, Loss: 0.3057
+2024-12-11 15:26:14,657 - INFO - Epoch 2, Step 1950, Loss: 0.1345
+2024-12-11 15:26:39,743 - INFO - Epoch 2, Step 2000, Loss: 0.2141
+2024-12-11 15:27:04,525 - INFO - Epoch 2, Step 2050, Loss: 0.1914
+2024-12-11 15:27:29,757 - INFO - Epoch 2, Step 2100, Loss: 0.1830
+2024-12-11 15:28:01,649 - INFO - Epoch 2, Step 2150, Loss: 0.1226
+2024-12-11 15:28:34,610 - INFO - Epoch 2, Step 2200, Loss: 0.4274
+2024-12-11 15:29:07,599 - INFO - Epoch 2, Step 2250, Loss: 0.2769
+2024-12-11 15:29:35,965 - INFO - Epoch 2, Loss: 0.4160, Perplexity: 1.5159
+2024-12-11 15:29:35,966 - INFO - Per epoch time: 1209.3218853473663 seconds
+2024-12-11 15:29:36,894 - INFO - Epoch 3, Step 0, Loss: 0.1871
+2024-12-11 15:30:10,064 - INFO - Epoch 3, Step 50, Loss: 0.2627
+2024-12-11 15:30:43,131 - INFO - Epoch 3, Step 100, Loss: 0.2145
+2024-12-11 15:31:14,497 - INFO - Epoch 3, Step 150, Loss: 0.1700
+2024-12-11 15:31:45,493 - INFO - Epoch 3, Step 200, Loss: 0.2178
+2024-12-11 15:32:10,232 - INFO - Epoch 3, Step 250, Loss: 0.3354
+2024-12-11 15:32:34,521 - INFO - Epoch 3, Step 300, Loss: 0.1601
+2024-12-11 15:32:59,497 - INFO - Epoch 3, Step 350, Loss: 0.2428
+2024-12-11 15:33:23,787 - INFO - Epoch 3, Step 400, Loss: 0.2945
+2024-12-11 15:33:48,647 - INFO - Epoch 3, Step 450, Loss: 0.1587
+2024-12-11 15:34:13,565 - INFO - Epoch 3, Step 500, Loss: 0.1018
+2024-12-11 15:34:38,617 - INFO - Epoch 3, Step 550, Loss: 0.2183
+2024-12-11 15:35:02,749 - INFO - Epoch 3, Step 600, Loss: 0.1655
+2024-12-11 15:35:26,501 - INFO - Epoch 3, Step 650, Loss: 0.1452
+2024-12-11 15:35:50,980 - INFO - Epoch 3, Step 700, Loss: 0.2495
+2024-12-11 15:36:15,449 - INFO - Epoch 3, Step 750, Loss: 0.1268
+2024-12-11 15:36:43,106 - INFO - Epoch 3, Step 800, Loss: 0.1433
+2024-12-11 15:37:14,014 - INFO - Epoch 3, Step 850, Loss: 0.1959
+2024-12-11 15:37:47,857 - INFO - Epoch 3, Step 900, Loss: 0.2343
+2024-12-11 15:38:29,445 - INFO - Epoch 3, Step 950, Loss: 0.2347
+2024-12-11 15:39:32,203 - INFO - Epoch 3, Step 1000, Loss: 0.2586
+2024-12-11 15:40:33,396 - INFO - Epoch 3, Step 1050, Loss: 0.1054
+2024-12-11 15:41:45,899 - INFO - Epoch 3, Step 1100, Loss: 0.2048
+2024-12-11 15:42:48,039 - INFO - Epoch 3, Step 1150, Loss: 0.3765
+2024-12-11 15:43:53,520 - INFO - Epoch 3, Step 1200, Loss: 0.2463
+2024-12-11 15:45:03,653 - INFO - Epoch 3, Step 1250, Loss: 0.1948
+2024-12-11 15:46:07,173 - INFO - Epoch 3, Step 1300, Loss: 0.1286
+2024-12-11 15:47:09,490 - INFO - Epoch 3, Step 1350, Loss: 0.1835
+2024-12-11 15:48:17,508 - INFO - Epoch 3, Step 1400, Loss: 0.2328
+2024-12-11 15:49:24,076 - INFO - Epoch 3, Step 1450, Loss: 0.1269
+2024-12-11 15:50:32,583 - INFO - Epoch 3, Step 1500, Loss: 0.2132
+2024-12-11 15:51:40,303 - INFO - Epoch 3, Step 1550, Loss: 0.1565
+2024-12-11 15:52:47,599 - INFO - Epoch 3, Step 1600, Loss: 0.1363
+2024-12-11 15:53:56,507 - INFO - Epoch 3, Step 1650, Loss: 0.1921
+2024-12-11 15:55:03,481 - INFO - Epoch 3, Step 1700, Loss: 0.1251
+2024-12-11 15:56:13,057 - INFO - Epoch 3, Step 1750, Loss: 0.2200
+2024-12-11 15:57:19,695 - INFO - Epoch 3, Step 1800, Loss: 0.1594
+2024-12-11 15:58:30,071 - INFO - Epoch 3, Step 1850, Loss: 0.3456
+2024-12-11 15:59:47,705 - INFO - Epoch 3, Step 1900, Loss: 0.1186
+2024-12-11 16:01:01,608 - INFO - Epoch 3, Step 1950, Loss: 0.2737
+2024-12-11 16:02:16,230 - INFO - Epoch 3, Step 2000, Loss: 0.2546
+2024-12-11 16:03:37,564 - INFO - Epoch 3, Step 2050, Loss: 0.0947
+2024-12-11 16:05:00,632 - INFO - Epoch 3, Step 2100, Loss: 0.2772
+2024-12-11 16:06:10,711 - INFO - Epoch 3, Step 2150, Loss: 0.2426
+2024-12-11 16:07:24,289 - INFO - Epoch 3, Step 2200, Loss: 0.1281
+2024-12-11 16:08:34,933 - INFO - Epoch 3, Step 2250, Loss: 0.2201
+2024-12-11 16:09:36,563 - INFO - Epoch 3, Loss: 0.3988, Perplexity: 1.4901
+2024-12-11 16:09:36,563 - INFO - Per epoch time: 2400.5962312221527 seconds
+2024-12-11 16:09:36,564 - INFO - Total training time: 4686.476694822311 seconds
+2024-12-11 16:09:39,664 - INFO - Model saved.
+2024-12-11 16:09:41,085 - INFO - Generated text: Once upon a time , the <unk> of the Roman Empire were in a state of flux . The Roman Catholic Church , which had long been the dominant political force in the empire , had been weakened by the civil war , and the rise of a
