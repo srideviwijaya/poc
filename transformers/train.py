@@ -105,7 +105,26 @@ for epoch in range(3):  # 3 epochs
 train_end_time = time.time()
 logging.info(f"Total training time: {train_end_time - train_start_time} seconds")
 
-model.save_pretrained("./gpt-model")
-tokenizer.save_pretrained("./gpt-tokenizer")
+save_directory = "model"
+model.save_pretrained(save_directory)
+tokenizer.save_pretrained(save_directory)
 
 logging.info(f"Model saved.")
+
+# Inferencing
+def generate_text(prompt, model, tokenizer, max_length=50):
+    model.eval()
+    inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
+    outputs = model.generate(
+        inputs["input_ids"],
+        max_length=max_length,
+        num_beams=5,
+        early_stopping=True,
+        no_repeat_ngram_size=2
+    )
+    return tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+# Example usage of inferencing
+prompt = "Once upon a time"
+generated_text = generate_text(prompt, model, tokenizer)
+logging.info(f"Generated text: {generated_text}")
