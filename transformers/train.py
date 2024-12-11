@@ -29,9 +29,9 @@ logging.info(f"Using device: {device}")
 
 # Load dataset
 logging.info("Loading dataset...")
-# data_dir = "../bookcorpus"
-# dataset = load_from_disk(data_dir)
-dataset = load_dataset("wikitext", "wikitext-2-v1", split="train")
+data_dir = "./wikitext-103-v1-train"
+dataset = load_from_disk(data_dir)
+# dataset = load_dataset("wikitext", "wikitext-2-v1", split="train")
 
 logging.info(f"Dataset loaded: {len(dataset)} samples")
 

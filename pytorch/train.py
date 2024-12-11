@@ -28,9 +28,9 @@ logging.info(f"Using device: {device}")
 
 # Load and preprocess dataset
 logging.info("Loading dataset...")
-# data_dir = "./wikitext-103-v1-train"
-# dataset = load_from_disk(data_dir)
-dataset = load_dataset("wikitext", "wikitext-2-v1", split="train")
+data_dir = "./wikitext-103-v1-train"
+dataset = load_from_disk(data_dir)
+# dataset = load_dataset("wikitext", "wikitext-2-v1", split="train")
 text_data = " ".join(dataset["text"])
 
 logging.info("Dataset loaded.")
